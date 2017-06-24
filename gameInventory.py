@@ -29,7 +29,28 @@ display_inventory(inventory)
 #   in descending order
 # - "count,asc" means the table is ordered by count in ascending order
 def print_table(inventory, order=None):
-    pass
+    try:
+        order = str(input("empty / count,desc / count,asc ?"))
+        print ("\nInventory: \ncount   item name\n-------------------")
+
+        if order == "empty":
+            for item in inventory:
+                print ("%4s:%12s" % (inventory[item], item))
+            print("-------------------\n Total number of items: ", sum(inventory.values()))
+
+        elif order == "count,desc":
+            for key, value in (sorted(inventory.items(), key=itemgetter(1), reverse = True)):
+                print ("%4s: %10s" % (value, key))
+            print("-------------------\n Total number of items: ", sum(inventory.values()))
+        elif order == "count,asc":
+            for key, value in (sorted(inventory.items(), key=itemgetter(1))):
+                print ("%4s: %10s" % (value, key))
+            print("-------------------\n Total number of items: ", sum(inventory.values()))
+
+    except ValueError: ("Invalid parameter! please write empty or count,desc or count,asc")
+        return None
+print_table(inventory, order=None)
+    
 
 
 # Imports new inventory items from a file
