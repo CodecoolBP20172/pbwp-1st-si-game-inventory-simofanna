@@ -7,17 +7,20 @@ def display_inventory(inventory):
     print("Inventory:")
     for item in inventory:
         print ("%s:%d" % (item, inventory[item]))
-
 display_inventory(inventory)
-    
-    pass
-
+   
 
 # Adds to the inventory dictionary a list of items from added_items.
+added_items = ['gold coin', 'dagger', 'gold coin', 'gold coin', 'ruby']
 def add_to_inventory(inventory, added_items):
-    pass
+    update_inventory = dict(Counter(inventory) + Counter(added_items))
+    return update_inventory
+inventory = add_to_inventory(inventory, added_items)
 
+add_to_inventory(inventory, added_items)
+display_inventory(inventory)
 
+   
 # Takes your inventory and displays it in a well-organized table with 
 # each column right-justified. The input argument is an order parameter (string)
 # which works as the following:
