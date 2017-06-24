@@ -2,9 +2,13 @@
 # so they work according to the specification
 
 # Displays the inventory.
+inventory = {'rope': 1, 'torch': 6, 'gold coin': 42, 'dagger': 1, 'arrow': 12}
 def display_inventory(inventory):
-    inventory = {'rope': 1, 'torch': 6, 'gold coin': 42, 'dagger': 1, 'arrow': 12}
+    print("Inventory:")
     for item in inventory:
+        print ("%s:%d" % (item, inventory[item]))
+
+display_inventory(inventory)
     
     pass
 
