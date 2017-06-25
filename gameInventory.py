@@ -58,7 +58,18 @@ print_table(inventory, order=None)
 # "import_inventory.csv". The import automatically merges items by name.
 # The file format is plain text with comma separated values (CSV).
 def import_inventory(inventory, filename="import_inventory.csv"):
-    pass
+    content = open(filename, 'r')
+    text_inventory = []
+    for word in content.read().split(","):
+        text_inventory.append(word)
+        current_inventory = dict(Counter(inventory) + Counter(text_inventory))
+        
+    print("\nInventory: \ncount   item name\n-------------------\n")
+    for item in current_inventory:
+        print ("%4s:%12s" % (current_inventory[item], item))
+    print("-------------------\n ")
+    print "Total number of items:", sum(current_inventory.values())
+import_inventory(inventory, filename="import_inventory.csv")
 
 
 # Exports the inventory into a .csv file.
