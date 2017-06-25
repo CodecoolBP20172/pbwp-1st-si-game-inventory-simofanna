@@ -62,14 +62,10 @@ def import_inventory(inventory, filename="import_inventory.csv"):
     text_inventory = []
     for word in content.read().split(","):
         text_inventory.append(word)
-        current_inventory = dict(Counter(inventory) + Counter(text_inventory))
-        
-    print("\nInventory: \ncount   item name\n-------------------\n")
-    for item in current_inventory:
-        print ("%4s:%12s" % (current_inventory[item], item))
-    print("-------------------\n ")
-    print "Total number of items:", sum(current_inventory.values())
+    inventory = add_to_inventory(inventory, text_inventory)
+    return inventory
 import_inventory(inventory, filename="import_inventory.csv")
+print_table(inventory, order=None)
 
 
 # Exports the inventory into a .csv file.
@@ -77,4 +73,6 @@ import_inventory(inventory, filename="import_inventory.csv")
 # called "export_inventory.csv". The file format is the same plain text 
 # with comma separated values (CSV).
 def export_inventory(inventory, filename="export_inventory.csv"):
-    pass
+    with open("export_inventory.csv", mode = "w") as f:
+        [f.write('{0},{1}\n'.format(key, value)) for key, value in inv.items()]
+    export_inventory(inventory, filename="export_inventory.csv")
