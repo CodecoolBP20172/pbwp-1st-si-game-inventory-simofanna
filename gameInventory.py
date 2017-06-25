@@ -73,6 +73,7 @@ print_table(inventory, order=None)
 # called "export_inventory.csv". The file format is the same plain text 
 # with comma separated values (CSV).
 def export_inventory(inventory, filename="export_inventory.csv"):
-    with open("export_inventory.csv", mode = "w") as f:
+    with open(filename, 'w') as f:
         [f.write('{0},{1}\n'.format(key, value)) for key, value in inv.items()]
-    export_inventory(inventory, filename="export_inventory.csv")
+export_inventory(inventory, filename="export_inventory.csv")
+
