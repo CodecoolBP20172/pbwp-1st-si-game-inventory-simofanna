@@ -7,6 +7,7 @@ def display_inventory(inventory):
     print("Inventory:")
     for item in inventory:
         print ("%s:%d" % (item, inventory[item]))
+    print("Total number of items: ", sum(inventory.values()))
 display_inventory(inventory)
    
 
@@ -73,7 +74,15 @@ print_table(inventory, order=None)
 # called "export_inventory.csv". The file format is the same plain text 
 # with comma separated values (CSV).
 def export_inventory(inventory, filename="export_inventory.csv"):
-    with open(filename, 'w') as f:
-        [f.write('{0},{1}\n'.format(key, value)) for key, value in inv.items()]
-export_inventory(inventory, filename="export_inventory.csv")
+    export_inv = []
+    for key in inventory:
+        for value in range(inventory.get(key)):
+            export_inv.append(key)
+    export_inv = ",".join(export_inv)
+    try:
+        with open(filename, "w") as f:
+            f.write(export_inv)
+    except FileNotFoundError:
+        print("The file is missing.")
 
+export_inventory(inventory, filename="export_inventory.csv")
